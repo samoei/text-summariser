@@ -1,0 +1,45 @@
+# pull official base image - Parent has no parent image AKA FROM scratch
+FROM python:3.11-slim-buster
+
+# create a home directory for the new user
+RUN mkdir -p /home/app
+
+#create a new user called app
+RUN addgroup --system app && adduser --system --group app
+
+
+# create the required directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+# set environmental variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV ENVIRONMENT prod
+ENV TESTING 0
+
+# Install the dependencies
+RUN apt-get update \
+    && apt-get -y install netcat gcc postgresql \
+    && apt-get clean
+
+RUN pip install --upgrade pip
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+RUN pip install "uvicorn[standard]==0.19.0"
+
+# copy the src files
+COPY . .
+
+# Give user app all the rights to the app directory and its subdirectories
+RUN chown -R app:app $APP_HOME
+
+# Change to user app
+USER app
+
+#Run the app againist the built image
+CMD gunicorn --bind 0.0.0.0:$PORT app.main:app -k uvicorn.workers.UvicornWorker
+
+

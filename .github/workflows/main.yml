@@ -61,9 +61,11 @@ jobs:
           run: docker build --cache-from ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ./src
         - name: Run container
           run: docker run -dp 5003:8765 --name text-summariser -e PORT=8765 -e ENVIRONMENT=dev -e DATABASE_URL=sqlite://sqlite.db -e DATABASE_TEST_URL=sqlite://sqlite.db ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        - name: Pytest
+          run: docker exec text-summariser python -m pytest .
         - name: Flake8
-          run: docker exec text-summariser python -m flake8 app
+          run: docker exec text-summariser python -m flake8 .
         - name: Black
-          run: docker exec text-summariser python -m black app --check
+          run: docker exec text-summariser python -m black . --check
         - name: isort
-          run: docker exec text-summariser python -m isort app
+          run: docker exec text-summariser python -m isort . --check-only

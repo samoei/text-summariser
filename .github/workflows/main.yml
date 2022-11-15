@@ -42,7 +42,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
 
   test:
-      name: Pull Build Test
+      name: Pull Run Test
       runs-on: ubuntu-latest
       needs: build
       permissions:

@@ -89,7 +89,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build image
-        run: docker build --cache-from ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --file ./src/Dockerfile.prod ./src
+        run: docker build --cache-from ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -t ${{ env.HEROKU_REGISTRY_IMAGE }}/${{ env.IMAGE_NAME }}:latest --file ./src/Dockerfile.prod ./src
       - name: Login to Heroku Container Registry
         run: docker login -u _ -p ${HEROKU_AUTH_TOKEN} registry.heroku.com
         env:

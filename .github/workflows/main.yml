@@ -90,34 +90,4 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           usedocker: true
           appdir: ./src
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#        with:
-#          ref: main
-#      - name: Log in to the Container registry
-#        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-#        with:
-#          registry: ${{ env.REGISTRY }}
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#      - name: Build image
-#        run: docker build --cache-from ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -t ${{ env.HEROKU_REGISTRY_IMAGE }}/${{ env.IMAGE_NAME }}:latest --file ./src/Dockerfile.prod ./src
-#      - name: Login to Heroku Container Registry
-#        run: docker login -u _ -p ${HEROKU_AUTH_TOKEN} registry.heroku.com
-#        env:
-#          HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
-#      - name: Publish
-#        run: |
-#          heroku container:push web -a ${HEROKU_APP_NAME}
-#          heroku container:release web -a ${HEROKU_APP_NAME}
-#      - name: Push to the registry
-#        run: docker push ${{ env.HEROKU_REGISTRY_IMAGE }}:latest
-#      - name: Set environment variables
-#        run: |
-#          echo "HEROKU_REGISTRY_IMAGE=${{ env.HEROKU_REGISTRY_IMAGE }}" >> $GITHUB_ENV
-#          echo "HEROKU_AUTH_TOKEN=${{ secrets.HEROKU_AUTH_TOKEN }}" >> $GITHUB_ENV
-#      - name: Release
-#        run: |
-#          chmod +x ./release.sh
-#          ./release.sh
 

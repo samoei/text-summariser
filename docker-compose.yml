@@ -11,8 +11,10 @@ services:
     environment:
       - ENVIRONMENT=dev
       - TESTING=0
-      - DATABASE_URL=postgres://postgres:postgres@web-db:5432/web_dev
-      - DATABASE_TEST_URL=postgres://postgres:postgres@web-db:5432/web_test
+      - DATABASE_URL=postgres://uctofthklwoiti:01980fe9be90ff8bddef123c2601bc805fbd459dd44fee35e8a7d55a9e8671a1@ec2-18-209-78-11.compute-1.amazonaws.com:5432/d91o84hk5ahjfc
+        /d91o84hk5ahjfc
+      - DATABASE_TEST_URL=postgres://uctofthklwoiti:01980fe9be90ff8bddef123c2601bc805fbd459dd44fee35e8a7d55a9e8671a1@ec2-18-209-78-11.compute-1.amazonaws.com:5432/d91o84hk5ahjfc
+        /d91o84hk5ahjfc
     depends_on:
       - web-db
 
@@ -23,5 +25,5 @@ services:
     expose:
       - 5432
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=uctofthklwoiti
+      - POSTGRES_PASSWORD=01980fe9be90ff8bddef123c2601bc805fbd459dd44fee35e8a7d55a9e8671a1

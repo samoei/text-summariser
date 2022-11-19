@@ -96,7 +96,6 @@ jobs:
         run: |
           docker build \
             --target builder \
-            --cache-from ${{ env.IMAGE_NAME }}-builder:latest \
             --tag ${{ env.IMAGE_NAME }}-builder:latest \
             --file ./src/Dockerfile.prod \
             "./src"

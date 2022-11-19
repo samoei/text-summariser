@@ -95,12 +95,10 @@ jobs:
       - name: Build images
         run: |
           docker build \
-            --target builder \
-            --tag ${{ env.IMAGE_NAME }}-builder:latest \
+            --tag ${{ env.IMAGE_NAME }}:latest \
             --file ./src/Dockerfile.prod \
             "./src"
           docker build \
-            --cache-from ${{ env.IMAGE_NAME }}-final:latest \
             --tag ${{ env.IMAGE_NAME }}:latest \
             --tag ${{ env.HEROKU_REGISTRY_IMAGE }}:latest \
             --file ./src/Dockerfile.prod \
